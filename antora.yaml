@@ -1,0 +1,6 @@
+name: sources-1
+title: Source 1
+version: 1.0.0
+start_page: ROOT:inline-text-formatting.adoc
+nav:
+- src/index.adoc
