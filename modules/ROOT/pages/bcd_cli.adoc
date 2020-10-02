@@ -1,0 +1,88 @@
+= BCD command-line interface
+
+On this page you will find detailed information about the BCD CLI with usage examples and reference.
+
+== Requirements
+
+* First, the `bcd` command requires that the *`BCD_HOME`* environment variable is set.
+By default `BCD_HOME` is set to `/home/bonita/bonita-continuous-delivery` in the controller container.
+* Next, the `bcd` command takes a *_mandatory option_* called `scenario` through the `-s / --scenario` command line option.
+This option expects an existing relative or absolute path to a xref:scenarios.adoc[BCD YAML scenario] file.
+The BCD scenario path can also be specified through the *`BCD_SCENARIO`* environment variable, hence allowing to skip the `-s / --scenario` command line option.
+* Finally, the BCD CLI expects to find Bonita version-specific dependencies in the *`$BCD_HOME/dependencies`* directory or any of its subdirectories.
+BCD dependencies include:
+ ** `bonita-la-builder-*-exec.jar` - (Mandatory) The Bonita Living Application Builder library
+ ** `bonita-sp-*-maven-repository.zip` - (Optional) The Bonita Maven repository zip if required by your Living Application workspace.
+Since BCD 3.0.0, dependencies can be retrieved as `quay.io/bonitasoft/bcd-dependencies:<bonita_version>` Docker images and they must be mounted as volumes in the `$BCD_HOME/dependencies` directory.
+You can read more about in link:getting_started.md#toc1[Common installation steps]
+
+== Usage examples
+
+Running the `create` subcommand of the `stack` command with scenario command-line option:
+
+[source,bash]
+----
+$ bcd -s scenarios/uswest2_cluster.yml stack create
+----
+
+Running the `deploy` subcommand of the `stack` command with scenario command-line option and overridden `mail_notification` variable:
+
+[source,bash]
+----
+$ bcd -s scenarios/vagrant_single.yml -e mail_notification=no -y stack deploy
+----
+
+Running the `destroy` subcommand of the `stack` command with `BCD_SCENARIO` environment variable and subcommand `--dry-run` option:
+
+[source,bash]
+----
+$ export BCD_SCENARIO=scenarios/uswest2_performance.yml
+$ bcd stack destroy --dry-run
+----
+
+Running the `build` subcommand of the `livingapp` command with `BCD_SCENARIO` environment variable and subcommand `-p` and `-e` options:
+
+[source,bash]
+----
+$ export BCD_SCENARIO=scenarios/euwest1_performance.yml
+$ bcd livingapp build -p path/to/livingapp-repo -e Test
+----
+
+Running the `version` command which does not require a scenario file:
+
+[source,bash]
+----
+$ bcd version
+----
+
+== Multi command chaining
+
+The BCD CLI allows to invoke more than one command in one go.
+This is useful to chain commands as a pipeline.
+
+If one command fails then `bcd` stops executing any subsequent command it may have.
+
+*Examples*:
+
+Running `create` then `deploy` subcommands of the `stack` command:
+
+[source,bash]
+----
+$ bcd -s scenarios/uswest2_cluster.yml -y stack create deploy
+----
+
+Running `build` then `deploy` subcommands of the `livingapp` command:
+
+[source,bash]
+----
+$ bcd -s scenarios/vagrant_single.yml --yes \
+    livingapp build -p path/to/livingapp-repo -e Test deploy
+----
+
+== Command-line reference
+
+This section describes the comprehensive usage information for the `bcd` command.
+
+You can also see this information by running `bcd --help` and `bcd [COMMAND] --help` - where COMMAND is in `[license, livingapp, stack, version]` - from the command line.
+
+[.h3]#bcd#

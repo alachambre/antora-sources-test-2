@@ -1,6 +1,6 @@
-name: sources-2
-title: Source 2
-version: 1.0.0
-start_page: ROOT:inline-text-formatting.adoc
+name: bcd
+title: Bonita Continous Delivery
+version: 3.4
+start_page: ROOT:index.adoc
 nav:
-- src/index.adoc
+- modules/ROOT/taxonomy.adoc
