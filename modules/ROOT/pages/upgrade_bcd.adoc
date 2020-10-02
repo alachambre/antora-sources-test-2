@@ -22,12 +22,12 @@ a stack already deployed from a previous version of BCD) you will need to copy p
 
 == How it works
 
-=== From a 1.0.x towards a $\{varVersion}.y
+=== From a 1.0.x towards a {bcdVersion}.y
 
 Please follow the previous documentation describing the https://documentation.bonitasoft.com/bcd/2.1/upgrade_bcd[upgrade from 1.0 toward 2.1].
 Then follow the instructions in the next section.
 
-=== From a 2.1.x towards a $\{varVersion}.y
+=== From a 2.1.x towards a {bcdVersion}.y
 
 ==== Scenarios
 
@@ -35,7 +35,7 @@ First, you will need to copy the files:
 
 [source,bash]
 ----
-$ cp bonita-continuous-delivery_2.1.0/scenarios/*.yml bonita-continuous-delivery_${varVersion}.0/scenarios/
+$ cp bonita-continuous-delivery_2.1.0/scenarios/*.yml bonita-continuous-delivery_{bcdVersion}.0/scenarios/
 ----
 
 Then you will have to check `Breaking changes` section in the xref:release_notes.adoc[release notes].
@@ -50,7 +50,7 @@ Copy the directory corresponding to your stack:
 
 [source,bash]
 ----
-$ cp -r bonita-continuous-delivery_2.1.0/terraform/your_stack_name bonita-continuous-delivery_${varVersion}.0/terraform/
+$ cp -r bonita-continuous-delivery_2.1.0/terraform/your_stack_name bonita-continuous-delivery_{bcdVersion}.0/terraform/
 ----
 
 ==== BCD controller
@@ -69,11 +69,11 @@ $ docker pull quay.io/bonitasoft/bcd-controller
 The username corresponds to `bcd_registry_user` and the password corresponds to `bcd_registry_password` described in the xref:scenarios.adoc[Scenario file reference].
 Both have been provided by your sales representative.
 
-If you choosed to persist your docker console history (xref:bcd_controller.adoc[see bcd controller]) and want to keep it, then you should copy your `.bcd_bash_history` file from your old folder to your new `+bonita-continuous-delivery_${varVersion}.0/+` folder
+If you choosed to persist your docker console history (xref:bcd_controller.adoc[see bcd controller]) and want to keep it, then you should copy your `.bcd_bash_history` file from your old folder to your new `+bonita-continuous-delivery_{bcdVersion}.0/+` folder
 
 [source,bash]
 ----
-$ cp bonita-continuous-delivery_2.1.0/.bcd_bash_history bonita-continuous-delivery_${varVersion}.0/.bcd_bash_history
+$ cp bonita-continuous-delivery_2.1.0/.bcd_bash_history bonita-continuous-delivery_{bcdVersion}.0/.bcd_bash_history
 ----
 
 ==== Vagrant
@@ -84,8 +84,8 @@ But if you plan to cleanup the old directory you can moved the vagrant data loca
 
 [source,bash]
 ----
-$ cp -r bonita-continuous-delivery_2.1.0/vagrant/1-machine/.vagrant bonita-continuous-delivery_${varVersion}.0/vagrant/1-machine/
-$ cp -r bonita-continuous-delivery_2.1.0/vagrant/2-machines/.vagrant bonita-continuous-delivery_${varVersion}.0/vagrant/2-machines/
+$ cp -r bonita-continuous-delivery_2.1.0/vagrant/1-machine/.vagrant bonita-continuous-delivery_{bcdVersion}.0/vagrant/1-machine/
+$ cp -r bonita-continuous-delivery_2.1.0/vagrant/2-machines/.vagrant bonita-continuous-delivery_{bcdVersion}.0/vagrant/2-machines/
 ----
 
 ==== Living Application repositories
@@ -96,5 +96,5 @@ For example :
 
 [source,bash]
 ----
-$ cp -r bonita-continuous-delivery_2.1.0/bonita-vacation-management-example bonita-continuous-delivery_${varVersion}.0/bonita-vacation-management-example
+$ cp -r bonita-continuous-delivery_2.1.0/bonita-vacation-management-example bonita-continuous-delivery_{bcdVersion}.0/bonita-vacation-management-example
 ----
